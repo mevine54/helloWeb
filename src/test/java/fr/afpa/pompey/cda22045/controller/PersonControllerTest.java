@@ -30,28 +30,10 @@ public class PersonControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-//    @MockBean
-//    private PersonService personService;
-
 
     @Test
     public void getPersonsTest() throws Exception {
-//        Person person1 = new Person();
-//        person1.setId(1);
-//        person1.setFirstname("John");
-//        person1.setLastname("Doe");
-//
-//        Person person2 = new Person();
-//        person2.setId(2);
-//        person2.setFirstname("Jane");
-//        person2.setLastname("Doe");
-//
-//        when(personService.getPersons()).thenReturn(Arrays.asList(person1, person2));
-//
-//        mockMvc.perform(get("/api/persons"))
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(content().json("[{\"id\":1,\"firstname\":\"John\",\"lastname\":\"Doe\"},{\"id\":2,\"firstname\":\"Jane\",\"lastname\":\"Doe\"}]"));
+
         mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -60,59 +42,5 @@ public class PersonControllerTest {
         }
     }
 
-//    @Test
-//    public void testCreatePerson() throws Exception {
-//        Person person = new Person();
-//        person.setId(1);
-//        person.setFirstname("John");
-//        person.setLastname("Doe");
-//
-//        when(personService.savePerson(any(Person.class))).thenReturn(person);
-//
-//        mockMvc.perform(post("/api/person")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content("{\"firstname\":\"John\",\"lastname\":\"Doe\"}"))
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(content().json("{\"id\":1,\"firstname\":\"John\",\"lastname\":\"Doe\"}"));
-//    }
-//
-//    @Test
-//    public void testGetPersonById() throws Exception {
-//        Person person = new Person();
-//        person.setId(1);
-//        person.setFirstname("John");
-//        person.setLastname("Doe");
-//
-//        when(personService.getPerson(1)).thenReturn(Optional.of(person));
-//
-//        mockMvc.perform(get("/api/person/1"))
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(content().json("{\"id\":1,\"firstname\":\"John\",\"lastname\":\"Doe\"}"));
-//    }
-//
-//    @Test
-//    public void testUpdatePerson() throws Exception {
-//        Person person = new Person();
-//        person.setId(1);
-//        person.setFirstname("Jane");
-//        person.setLastname("Doe");
-//
-//        when(personService.getPerson(1)).thenReturn(Optional.of(person));
-//        when(personService.savePerson(any(Person.class))).thenReturn(person);
-//
-//        mockMvc.perform(put("/api/person/1")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content("{\"firstname\":\"Jane\",\"lastname\":\"Doe\"}"))
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(content().json("{\"id\":1,\"firstname\":\"Jane\",\"lastname\":\"Doe\"}"));
-//    }
-//
-//    @Test
-//    public void testDeletePerson() throws Exception {
-//        mockMvc.perform(delete("/api/person/1"))
-//                .andExpect(status().isOk());
-//    }
+
 
