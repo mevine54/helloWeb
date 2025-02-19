@@ -15,7 +15,7 @@ pipeline {
                 script {
                     git branch: 'main',
                     credentialsId: 'jenhub',
-                    url: 'https://github.com/mevine54/jenkins.git'
+                    url: 'https://github.com/mevine54/helloWeb.git'
                 }
             }
         }
