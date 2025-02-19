@@ -19,7 +19,7 @@ pipeline {
                 script {
                     git branch: 'main',
                     credentialsId: 'jenkinstest',
-                    url: 'https://github.com/mevine54/helloWeb.git'
+                    url: 'https://github.com/mevine54/helloweb.git'
                 }
             }
         }
@@ -31,7 +31,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('mevine54/helloWeb:latest', '-f Dockerfile .')
+                    docker.build('mevine54/helloweb:latest', '-f Dockerfile .')
                 }
             }
         }
