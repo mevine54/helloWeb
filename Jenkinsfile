@@ -4,6 +4,11 @@ pipeline {
         maven 'Maven 3.9.6'
     }
     stages {
+        stage('Clean workspace') {
+            steps{
+                cleanWs()
+            }
+        }
 
         stage('Git Checkout') {
             steps {
