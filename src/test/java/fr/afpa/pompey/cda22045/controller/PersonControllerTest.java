@@ -38,7 +38,7 @@ public class PersonControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
-                .andExpect(MockMvcResultMatchers.content().string(containsString("john")));
+                .andExpect(MockMvcResultMatchers.content().string(containsString("Pennington")));
         }
     }
 
