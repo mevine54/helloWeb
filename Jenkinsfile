@@ -6,7 +6,7 @@ pipeline {
     registry = "mevine54/helloweb"
     // compte DockerHub parametre sur le serveur jenkins
     // dans la rubrique credentials de l'administration serveur
-    registryCredentials = 'DockerHubAccount'
+    registryCredential = 'DockerHubAccount'
     dockerImage = ''
     }
 
