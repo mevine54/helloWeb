@@ -1,0 +1,60 @@
+
+
+services:
+  mysql:
+    image: mysql:latest
+    #build: ./infra/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - db-network
+
+  helloapi:
+    build : ./
+    ports:
+      - "9002:9000"
+    depends_on:
+      - mysql
+    networks:
+      - db-network
+      - api-network
+
+  helloweb:
+    build: ./
+    ports:
+      - "8000:9001"
+    depends_on:
+      - helloapi
+    networks:
+      - api-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: user
+      PMA_PASSWORD: password
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - db-network
+
+volumes:
+  mysql-data:
+
+networks:
+  db-network:
+    driver: bridge
+  api-network:
+    driver: bridge
+
+

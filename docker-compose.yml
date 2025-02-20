@@ -1,59 +1,56 @@
-
-
 services:
-  mysql:
+  mysql_server:
+    #build: ./infra/mysql
     image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+    container_name: mysql_server
+    restart: always
     ports:
-      - "6000:6000"
+      - "3307:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
+      - ${MYSQL_DATA_DIR}:/var/lib/mysql
+      - ${LOG_DIR_MYSQL:/var/log/mysql
+      - ${MYSQL_DUMP_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MY_DATABASE}
     networks:
-      - db-network
+      - backend
 
-  helloapi:
-    build : ./
+  helloworld:
+    image: ${API_IMAGE_NAME}
+    container-name: helloworld
+    restart: on-failure
     ports:
-      - "5001:5000"
+      - "9002:9000"
+    environment:
+    - SPRING_DATASOURCE_URL=${URL_BDD}
+    # ce n'est pas parfait car données sensibles
+    - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
+    - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
+    # Paramètres Dialect de SpringBoot pour la connexion BDD
+    - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+    - SPRING_JPA_SHOW_SQL=true
+    - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
     depends_on:
-      - mysql
+      - mysql_server
     networks:
-      - db-network
-      - api-network
+      - backend
 
   helloweb:
-    build: ./
+    image: ${WEB_IMAGE_NAME}
+    container_name: helloweb
     ports:
-      - "8000:8000"
+      - "8000:9001"
     depends_on:
-      - helloapi
-    networks:
-      - api-network
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+      - helloworld
     environment:
-      PMA_HOST: mysql
-      PMA_USER: user
-      PMA_PASSWORD: password
-    ports:
-      - "8081:80"
-    depends_on:
-      - mysql
+      - FR.POMPEY.CDA23016.WEBPROJET.URLAPI=${URL_API}
+    # un appel HHTP est effectué qur la route http://helloworld:9000/persons
+    healthcheck:
+      test: curl -f http://helloworld:9000/persons || exit 1
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 10s
     networks:
-      - db-network
-
-volumes:
-  mysql-data:
-
-networks:
-  db-network:
-    driver: bridge
-  api-network:
-    driver: bridge
-
-
+      - backend
