@@ -13,7 +13,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      - mynetwork
+      - db-network
 
   HelloApi:
     build : ./api
@@ -22,7 +22,8 @@ services:
     depends_on:
       - mysql
     networks:
-      - mynetwork
+      - db-network
+      - api-network
 
   HelloWeb:
     build: ./web
@@ -31,12 +32,12 @@ services:
     depends_on:
       - HelloApi
     networks:
-      - mynetwork
+      - api-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     environment:
-      PMA_HOST: musql
+      PMA_HOST: mysql
       PMA_USER: user
       PMA_PASSWORD: password
     ports:

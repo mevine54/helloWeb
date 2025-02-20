@@ -33,6 +33,7 @@ pipeline {
             steps {
                 script {
                     docker.build('mevine54/helloweb:latest', '-f Dockerfile .')
+                    docker.build('mevine54/helloapi:latest', '-f Dockerfile .')
                 }
             }
         }
