@@ -54,3 +54,12 @@ services:
       timeout: 10s
     networks:
       - backend
+
+  volumes:
+    mysql_data:
+    mysql_logs:
+    mysql_dump:
+
+  networks:
+    backend:
+      driver: bridge
