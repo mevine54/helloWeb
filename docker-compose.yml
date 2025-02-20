@@ -27,6 +27,7 @@ services:
     # ce n'est pas parfait car données sensibles
     - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
     - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
+    - URL_API=${URL_API}
     # Paramètres Dialect de SpringBoot pour la connexion BDD
     - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
     - SPRING_JPA_SHOW_SQL=true
