@@ -28,7 +28,7 @@ services:
   helloweb:
     build: ./
     ports:
-      - "8082:8080"
+      - "8000:8000"
     depends_on:
       - helloapi
     networks:
