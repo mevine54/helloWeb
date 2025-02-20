@@ -17,6 +17,7 @@ services:
 
   helloapi:
     build : ./pipeline_cicd_web
+    ports:
       - "5000:5000"
     depends_on:
       - mysql
