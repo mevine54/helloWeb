@@ -16,7 +16,7 @@ services:
       - db-network
 
   helloapi:
-    build : ./
+    build : ./pipeline_cicd_web
       - "5000:5000"
     depends_on:
       - mysql
@@ -25,7 +25,7 @@ services:
       - api-network
 
   helloweb:
-    build: ./
+    build: ./pipeline_cicd_web
     ports:
       - "8080:8080"
     depends_on:
