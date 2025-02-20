@@ -1,4 +1,4 @@
-version: '3.8'
+
 
 services:
   mysql:
@@ -15,7 +15,7 @@ services:
     networks:
       - db-network
 
-  HelloApi:
+  helloapi:
     build : ./api
     ports:
       - "5000:5000"
