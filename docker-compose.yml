@@ -18,7 +18,7 @@ services:
 
   helloworld:
     image: ${API_IMAGE_NAME}
-    container-name: helloworld
+    container_name: helloworld
     restart: on-failure
     ports:
       - "9002:9000"
