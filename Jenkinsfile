@@ -12,6 +12,7 @@ pipeline {
 
     tools {
         maven 'Maven 3.9.6'
+        jdk 'JDK21'
     }
     stages {
         stage('Git Checkout') {
@@ -45,5 +46,14 @@ pipeline {
                 }
             }
         }
+        stage('Deploy docker-compose') {
+                    steps {
+                        // initialise le conteneur docker
+                        script {
+                            // construit les services
+                            bat 'docker-compose up -d --build --force-recreate --remove-orphans'
+                        }
+                    }
+            }
     }
 }
