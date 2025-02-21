@@ -45,7 +45,7 @@ services:
     depends_on:
       - helloworld
     environment:
-      - FR.POMPEY.CDA23016.WEBPROJET.URLAPI=${URL_API}
+      - URL_API=${URL_API}
     # un appel HHTP est effectué qur la route http://helloworld:9000/persons
     healthcheck:
       test: curl -f http://helloworld:9002/api/persons || exit 1
