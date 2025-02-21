@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+  options {
+        // This is required if you want to clean before build
+        skipDefaultCheckout(true)
+    }
     environment {
     // nom image pour DockerHub
     registry = "mevine54/helloweb"
@@ -17,11 +20,7 @@ pipeline {
     stages {
         stage('Clean workspace'){
             steps {
-                if (fileExists(workspace)) {
                     cleanWs()
-                } else {
-                    echo "Workspace does not exist, skipping clean."
-                }
             }
         }
         stage('Git Checkout') {
