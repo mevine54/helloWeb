@@ -15,6 +15,15 @@ pipeline {
         jdk 'JDK21'
     }
     stages {
+        stage('Clean workspace'){
+            steps {
+                if (fileExists(workspace)) {
+                    cleanWs()
+                } else {
+                    echo "Workspace does not exist, skipping clean."
+                }
+            }
+        }
         stage('Git Checkout') {
             steps {
                 script {
